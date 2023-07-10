@@ -5,6 +5,8 @@ const meaningContainer = document.getElementById("meaning-container");
 const titleElement = document.getElementById("title");
 const meaningElement = document.getElementById("meaning");
 const audioElement = document.getElementById("audio");
+const partOfSpeech = document.getElementById("part-of-speech");
+const exampleElement = document.getElementById("example");
 
 async function fetchAPI(word) {
     try {
@@ -24,8 +26,10 @@ async function fetchAPI(word) {
             meaningContainer.style.display = 'block';
             audioElement.style.display = 'inline-flex';
             titleElement.innerText = result[0].word;
+            partOfSpeech.innerText = result[0].meanings[0].partOfSpeech;
             meaningElement.innerText = result[0].meanings[0].definitions[0].definition;
             audioElement.src = result[0].phonetics[0].audio;
+            exampleElement.innerText = result[0].meanings[0].definitions[0].example;
         }
         input.value = ''; // Clear the input field after the search event
     } catch (error) {
