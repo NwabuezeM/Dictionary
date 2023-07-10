@@ -31,7 +31,7 @@ async function fetchAPI(word) {
             audioElement.src = result[0].phonetics[0].audio;
             exampleElement.innerText = result[0].meanings[0].definitions[0].example;
         }
-        input.value = ''; // Clear the input field after the search event
+        input.value = '';
     } catch (error) {
         infoText.innerText = `An error occured, please try again`;
     }    
