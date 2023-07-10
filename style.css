@@ -80,5 +80,10 @@ footer {
   
   footer a:hover {
     text-decoration: underline;
-    color: cyan;
+  }
+
+  @media only screen and (max-width: 500px) {
+    footer a:hover {
+        color: cyan;
+    }
   }
