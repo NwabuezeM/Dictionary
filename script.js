@@ -7,6 +7,8 @@ const meaningElement = document.getElementById("meaning");
 const audioElement = document.getElementById("audio");
 const partOfSpeech = document.getElementById("part-of-speech");
 const exampleElement = document.getElementById("example");
+const partOfSpeechText = document.getElementById("part-of-speech-text");
+const exampleText = document.getElementById("example-text");
 
 async function fetchAPI(word) {
     try {
@@ -19,17 +21,24 @@ async function fetchAPI(word) {
             meaningContainer.style.display = 'block'
             infoText.style.display = 'none'
             titleElement.innerText = word;
+            partOfSpeech.style.display = 'none';
             meaningElement.innerText = `No results found for ${word}`;
             audioElement.style.display = "none";
+            exampleElement.style.display = "none";
         } else {
             infoText.style.display = 'none';
             meaningContainer.style.display = 'block';
+            partOfSpeech.style.display = 'inline-flex';
             audioElement.style.display = 'inline-flex';
+            exampleElement.style.display = "inline-flex";
             titleElement.innerText = result[0].word;
-            partOfSpeech.innerText = result[0].meanings[0].partOfSpeech;
+            partOfSpeechText.innerText = `: ${result[0].meanings[0].partOfSpeech}`;
             meaningElement.innerText = result[0].meanings[0].definitions[0].definition;
             audioElement.src = result[0].phonetics[0].audio;
-            exampleElement.innerText = result[0].meanings[0].definitions[0].example;
+            exampleText.innerText = `: ${result[0].meanings[0].definitions[0].example}`;
+        }
+        if(result[0].meanings[0].definitions[0].example === undefined) {
+            exampleElement.style.display = "none";
         }
         input.value = '';
     } catch (error) {
